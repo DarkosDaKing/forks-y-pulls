@@ -8,6 +8,13 @@ class Product {
   id: number;
   name: string;
   price: number;
+
+  static findProductsBelow(precioBase:number) {
+    const bajoPrecio = products.filter((Product) => {
+      return Product.price < precioBase
+    })
+    return bajoPrecio
+  }
 }
 
 class User {
@@ -16,13 +23,15 @@ class User {
   }
   name: string;
   products: Product[] = [];
+
   addProduct(newProduct: Product) {
     this.products.push(newProduct);
   }
   addProducts(newProducts: Product[]) {
     // esto no funciona:
-    this.products.push(newProducts);
+    this.products.push(...newProducts);
     // pista: push no suma muchos items (agrega de a uno)
+    // ! el (...) es un operador de propagacion, para agregar todos los elementos
   }
 }
 
